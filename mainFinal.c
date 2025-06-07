@@ -7,6 +7,7 @@ void entradaNomes(char nomes[10][40]) {
     for (i = 0; i < 10; i++) {
         printf("Digite o %2do. nome: ", i+1);
         fflush(stdin); fgets(nomes[i], 40, stdin);
+        nomes[i][strcspn(nomes[i], "\n")] = '\0'; // Remove o \n do final
     }
 }
 
@@ -26,7 +27,7 @@ void apresentaNomes(char nomes[10][40]) {
     int i;
     printf("\n");
     for (i = 0; i < 10; i++)
-        printf("Nome: %2d --> %s", i+1, nomes[i]);
+        printf("Nome: %2d --> %s\n", i+1, nomes[i]);
 }
 
 char perguntaOrdenacao() {
@@ -77,11 +78,12 @@ int main(void)
     while (RESP == 'S' || RESP == 's') {
         printf("\nDigite o nome que deseja ser pesquisado: ");
         fflush(stdin); fgets(PESQ, 40, stdin);
+        PESQ[strcspn(PESQ, "\n")] = '\0'; // Remove o \n do final
 
         pos = pesquisaNome(NOME, PESQ);
 
         if (pos != -1)
-            printf("%s foi localizado na posicao %d", PESQ, pos+1);
+            printf("\n%s foi localizado na posicao %d", PESQ, pos+1);
         else
             printf("%s nao foi localizado", PESQ);
 
